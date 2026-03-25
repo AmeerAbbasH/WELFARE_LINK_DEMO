@@ -1,0 +1,12 @@
+﻿using WELFARE_Application_MVCF.Models;
+namespace WELFARE_Application_MVCF.Interfaces
+{
+    public interface IProgramRepository
+    {
+        Task<IEnumerable<WelfareProgram>> GetAllProgramsAsync();
+        Task<WelfareProgram> GetProgramByIdAsync(int id);
+        Task AddProgramAsync(WelfareProgram program);
+        Task UpdateProgramAsync(WelfareProgram program);
+        Task DeleteProgramAsync(int id);
+    }
+}

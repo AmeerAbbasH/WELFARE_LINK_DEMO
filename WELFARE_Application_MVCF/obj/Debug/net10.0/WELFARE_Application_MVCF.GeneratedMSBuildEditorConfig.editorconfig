@@ -1,0 +1,135 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFramework = net10.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.RootNamespace = WELFARE_Application_MVCF
+build_property.RootNamespace = WELFARE_Application_MVCF
+build_property.ProjectDir = C:\Users\2481427\OneDrive - Cognizant\Documents\VS projects\WELFARE_Application_MVCF\WELFARE_Application_MVCF\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\2481427\OneDrive - Cognizant\Documents\VS projects\WELFARE_Application_MVCF\WELFARE_Application_MVCF
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/BudgetMonitoring.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxCdWRnZXRNb25pdG9yaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Manage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxNYW5hZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Program/Performance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbVxQZXJmb3JtYW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/AllocateForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcQWxsb2NhdGVGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/ManageResources.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcTWFuYWdlUmVzb3VyY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Resource/UtilisationReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcVXRpbGlzYXRpb25SZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Shared/_LayoutPM.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRQTS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/User/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2481427/OneDrive - Cognizant/Documents/VS projects/WELFARE_Application_MVCF/WELFARE_Application_MVCF/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-demdnzzek6

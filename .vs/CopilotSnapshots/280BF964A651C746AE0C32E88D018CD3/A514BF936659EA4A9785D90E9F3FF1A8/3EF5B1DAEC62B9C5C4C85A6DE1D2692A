@@ -1,0 +1,101 @@
+﻿using Microsoft.EntityFrameworkCore;
+using WELFARE_Application_MVCF.Data;
+using WELFARE_Application_MVCF.Models;
+
+namespace WELFARE_Application_MVCF.Data
+{
+    public static class DbInitializer
+    {
+        public static void Initialize(WelfareDbContext context)
+        {
+            // Ensure database is created
+            context.Database.EnsureCreated();
+
+            // Check if data already exists
+            if (context.Programs.Any())
+            {
+                return; // DB has been seeded
+            }
+
+            // Add sample programmes
+            var programs = new WelfareProgram[]
+            {
+                new WelfareProgram
+                {
+                    Title = "Winter Fuel Subsidy",
+                    Description = "Assistance for heating costs during winter months",
+                    StartDate = new DateTime(2026, 10, 1),
+                    EndDate = new DateTime(2027, 3, 31),
+                    Budget = 500000,
+                    Status = "Active"
+                },
+                new WelfareProgram
+                {
+                    Title = "Housing Support Programme",
+                    Description = "Financial assistance for low-income housing",
+                    StartDate = new DateTime(2026, 1, 1),
+                    EndDate = new DateTime(2026, 12, 31),
+                    Budget = 1200000,
+                    Status = "Active"
+                },
+                new WelfareProgram
+                {
+                    Title = "Education Grant Scheme",
+                    Description = "Educational support for underprivileged students",
+                    StartDate = new DateTime(2025, 6, 1),
+                    EndDate = new DateTime(2026, 5, 31),
+                    Budget = 800000,
+                    Status = "Active"
+                },
+                new WelfareProgram
+                {
+                    Title = "Food Security Initiative",
+                    Description = "Food assistance for families in need",
+                    StartDate = new DateTime(2025, 1, 1),
+                    EndDate = new DateTime(2025, 12, 31),
+                    Budget = 600000,
+                    Status = "Completed"
+                }
+            };
+
+            context.Programs.AddRange(programs);
+            context.SaveChanges();
+
+            // Add sample resources
+            var resources = new Resource[]
+            {
+                new Resource
+                {
+                    ProgramID = programs[0].ProgramID,
+                    Type = "Funds",
+                    Quantity = 300000,
+                    Status = "Available"
+                },
+                new Resource
+                {
+                    ProgramID = programs[1].ProgramID,
+                    Type = "Funds",
+                    Quantity = 800000,
+                    Status = "Available"
+                },
+                new Resource
+                {
+                    ProgramID = programs[1].ProgramID,
+                    Type = "Materials",
+                    Quantity = 150,
+                    Status = "Available"
+                },
+                new Resource
+                {
+                    ProgramID = programs[2].ProgramID,
+                    Type = "Funds",
+                    Quantity = 500000,
+                    Status = "Available"
+                }
+            };
+
+            context.Resources.AddRange(resources);
+            context.SaveChanges();
+        }
+    }
+}

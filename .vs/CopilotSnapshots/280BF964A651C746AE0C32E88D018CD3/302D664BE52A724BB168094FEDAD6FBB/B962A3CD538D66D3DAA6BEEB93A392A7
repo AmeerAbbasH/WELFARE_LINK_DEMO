@@ -1,0 +1,173 @@
+﻿@model WELFARE_Application_MVCF.Models.WelfareProgram
+
+@{
+    ViewData["Title"] = "Manage Welfare Programmes";
+    Layout = "_LayoutPM";
+    var allPrograms = ViewBag.AllPrograms as IEnumerable<WELFARE_Application_MVCF.Models.WelfareProgram>;
+    var isUpdate = ViewBag.IsUpdate != null && (bool)ViewBag.IsUpdate;
+}
+
+<header>
+    <h1>Manage Welfare Programmes</h1>
+    <p>Choose an action below to either create a new welfare programme or update an existing one.</p>
+</header>
+
+<div class="mode-toggle">
+    <label>
+        <input type="radio" name="actionMode" id="radioAdd" value="add" @(!isUpdate ? "checked" : "") onchange="toggleMode()"> 
+        Add New Programme
+    </label>
+    <label>
+        <input type="radio" name="actionMode" id="radioUpdate" value="update" @(isUpdate ? "checked" : "") onchange="toggleMode()"> 
+        Update Existing Programme
+    </label>
+</div>
+
+<div id="updateSelection" style="display: @(isUpdate ? "block" : "none");">
+    <div class="search-row">
+        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label for="programSelect" style="color: #2c3e50;">Select Programme to Update:</label>
+            <select id="programSelect" style="width: 100%;">
+                <option value="" disabled @(Model?.ProgramID == 0 || Model?.ProgramID == null ? "selected" : "")>-- Select a Programme --</option>
+                @if (allPrograms != null)
+                {
+                    foreach (var prog in allPrograms)
+                    {
+                        <option value="@prog.ProgramID" @(Model?.ProgramID == prog.ProgramID ? "selected" : "")>
+                            PRG-@prog.ProgramID: @prog.Title
+                        </option>
+                    }
+                }
+                @if (allPrograms != null)
+                {
+                    foreach (var prog in allPrograms)
+                    {
+                        <option value="@prog.ProgramID">PRG-@prog.ProgramID: @prog.Title</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" style="background: #2c3e50;" onclick="loadProgramDetails()">Load Details</button>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (ViewData.ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Please correct the errors below.
+    </div>
+}
+
+<div class="form-container">
+    <form asp-action="Manage" method="post" id="mainProgramForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="ProgramID" id="programId" />
+        
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label asp-for="Title">Programme Title</label>
+                <input asp-for="Title" type="text" id="Title" placeholder="e.g., Housing Support" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group full-width">
+                <label asp-for="Description">Description & Objectives</label>
+                <textarea asp-for="Description" id="Description" placeholder="Enter objectives and eligibility details..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="StartDate">Start Date</label>
+                <input asp-for="StartDate" type="date" id="StartDate" value="@Model?.StartDate.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndDate">End Date</label>
+                <input asp-for="EndDate" type="date" id="EndDate" value="@Model?.EndDate.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Budget">Budget Allocation (₹)</label>
+                <input asp-for="Budget" type="number" id="Budget" step="0.01" placeholder="0.00" />
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Status">Status</label>
+                <select asp-for="Status" id="Status">
+                    <option value="Active">Active</option>
+                    <option value="Suspended">Suspended</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.9rem; color: #7f8c8d;">* Audit logs are generated for all modifications.</span>
+            <div>
+                <button type="reset" class="btn btn-secondary">Clear</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Create Programme</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const isUpdate = @(ViewBag.IsUpdate != null && ViewBag.IsUpdate ? "true" : "false");
+            if (isUpdate) {
+                // Auto-select Update mode and show dropdown
+                document.getElementById('radioUpdate').checked = true;
+                toggleMode();
+            }
+        });
+
+        function toggleMode() {
+            const isUpdateMode = document.getElementById('radioUpdate').checked;
+            const updateSelectionDiv = document.getElementById('updateSelection');
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('mainProgramForm');
+
+            if (isUpdateMode) {
+                updateSelectionDiv.style.display = 'block';
+                submitBtn.innerText = 'Update Programme';
+                submitBtn.style.backgroundColor = '#27ae60';
+            } else {
+                updateSelectionDiv.style.display = 'none';
+                submitBtn.innerText = 'Create Programme';
+                submitBtn.style.backgroundColor = '#2980b9';
+                form.reset();
+                document.getElementById('programId').value = '0';
+                // Reset dates to defaults
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('StartDate').value = today;
+                const sixMonthsLater = new Date();
+                sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
+                document.getElementById('EndDate').value = sixMonthsLater.toISOString().split('T')[0];
+            }
+        }
+
+        function loadProgramDetails() {
+            const programId = document.getElementById('programSelect').value;
+            if (programId) {
+                // Redirect to Manage page with id parameter
+                window.location.href = '@Url.Action("Manage", "Program")?id=' + programId;
+            } else {
+                alert('Please select a programme first.');
+            }
+        }
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿using WELFARE_Application_MVCF.Interfaces;
+using WELFARE_Application_MVCF.Models;
+
+namespace WELFARE_Application_MVCF.Services
+{
+    public class ResourceService : IResourceService
+    {
+        private readonly IResourceRepository _resourceRepository;
+
+        public ResourceService(IResourceRepository resourceRepository)
+        {
+            _resourceRepository = resourceRepository;
+        }
+
+        public async Task<IEnumerable<Resource>> GetAllResourcesAsync()
+        {
+            return await _resourceRepository.GetAllResourcesAsync();
+        }
+
+        public async Task<IEnumerable<Resource>> GetResourcesByProgramIdAsync(int programId)
+        {
+            return await _resourceRepository.GetResourcesByProgramIdAsync(programId);
+        }
+
+        public async Task AddResourceAsync(Resource resource)
+        {
+            await _resourceRepository.AddResourcesAsync(resource);
+        }
+
+        public async Task UpdateResourceAsync(Resource resource)
+        {
+            await _resourceRepository.UpdateResourceAsync(resource);
+        }
+    }
+}

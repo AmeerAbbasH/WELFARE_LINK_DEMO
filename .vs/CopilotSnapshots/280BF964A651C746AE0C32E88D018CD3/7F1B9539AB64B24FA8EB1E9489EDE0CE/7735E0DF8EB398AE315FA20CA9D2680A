@@ -1,0 +1,126 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WELFARE_Application_MVCF.Interfaces;
+using WELFARE_Application_MVCF.Models;
+
+namespace WELFARE_Application_MVCF.Controllers
+{
+    public class ResourceController : Controller
+    {
+        private readonly IResourceService _resourceService;
+        private readonly IProgramService _programService;
+
+        public ResourceController(IResourceService resourceService, IProgramService programService)
+        {
+            _resourceService = resourceService;
+            _programService = programService;
+        }
+
+        // GET: Resource
+        public async Task<IActionResult> Index()
+        {
+            var resources = await _resourceService.GetAllResourcesAsync();
+            return View(resources);
+        }
+
+        // GET: Resource/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetAllResourcesAsync();
+            var resource = resources.FirstOrDefault(r => r.ResourceID == id);
+            
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
+            return View(resource);
+        }
+
+        // GET: Resource/Create
+        public async Task<IActionResult> Create()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title");
+            return View();
+        }
+
+        // POST: Resource/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ResourceID,ProgramID,Type,Quantity,Status")] Resource resource)
+        {
+            if (ModelState.IsValid)
+            {
+                await _resourceService.AddResourceAsync(resource);
+                return RedirectToAction(nameof(Index));
+            }
+            
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title", resource.ProgramID);
+            return View(resource);
+        }
+
+        // GET: Resource/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetAllResourcesAsync();
+            var resource = resources.FirstOrDefault(r => r.ResourceID == id);
+            
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title", resource.ProgramID);
+            return View(resource);
+        }
+
+        // POST: Resource/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ResourceID,ProgramID,Type,Quantity,Status")] Resource resource)
+        {
+            if (id != resource.ResourceID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _resourceService.UpdateResourceAsync(resource);
+                return RedirectToAction(nameof(Index));
+            }
+            
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title", resource.ProgramID);
+            return View(resource);
+        }
+
+        // GET: Resource/ByProgram/5
+        public async Task<IActionResult> ByProgram(int? programId)
+        {
+            if (programId == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetResourcesByProgramIdAsync(programId.Value);
+            var program = await _programService.GetProgramByIdAsync(programId.Value);
+            
+            ViewBag.ProgramTitle = program?.Title;
+            return View(resources);
+        }
+    }
+}

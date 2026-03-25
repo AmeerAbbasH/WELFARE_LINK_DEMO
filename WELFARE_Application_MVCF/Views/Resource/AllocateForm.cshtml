@@ -1,0 +1,71 @@
+@model WELFARE_Application_MVCF.Models.Resource
+
+@{
+    ViewData["Title"] = "Allocate Resources";
+    Layout = "_LayoutPM";
+    var programs = ViewBag.Programs as Microsoft.AspNetCore.Mvc.Rendering.SelectList;
+}
+
+<header>
+    <h1>Add Resource Allocation</h1>
+    <p>Manage resources allocated to a programme.</p>
+</header>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (ViewData.ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Please correct the errors below.
+    </div>
+}
+
+<div class="form-container">
+    <form asp-action="AllocateForm" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="ResourceID" value="0" />
+
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label asp-for="ProgramID">Select Programme</label>
+                <select asp-for="ProgramID" asp-items="programs">
+                    <option value="">-- Select Programme --</option>
+                </select>
+                <span asp-validation-for="ProgramID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Type">Resource Type</label>
+                <select asp-for="Type">
+                    <option value="">-- Select Type --</option>
+                    <option value="Funds">Funds</option>
+                    <option value="Materials">Materials</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Quantity">Quantity / Amount</label>
+                <input asp-for="Quantity" type="number" step="0.01" placeholder="0.00" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.9rem; color: #7f8c8d;">* Resource will be created with "Available" status.</span>
+            <div>
+                <button type="reset" class="btn btn-secondary">Clear</button>
+                <button type="submit" class="btn btn-primary">Allocate Resource</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WelfareLink</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <nav class="sidebar">
+            <h2>PM Dashboard</h2>
+            <a asp-controller="Program" asp-action="Dashboard" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active-link" : "")">Main Dashboard</a>
+            <a asp-controller="Program" asp-action="Index" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active-link" : "")">View All Programs</a>
+            <a asp-controller="Program" asp-action="Manage" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Manage" || ViewContext.RouteData.Values["action"]?.ToString() == "Create" || ViewContext.RouteData.Values["action"]?.ToString() == "Edit" ? "active-link" : "")">Add / Update Program</a>
+            <a asp-controller="Resource" asp-action="AllocateForm" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Resource" && ViewContext.RouteData.Values["action"]?.ToString() == "AllocateForm" ? "active-link" : "")">Resource Allocation</a>
+            <a asp-controller="Resource" asp-action="UtilisationReport" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "UtilisationReport" ? "active-link" : "")">Utilization Overview</a>
+            <a asp-controller="Program" asp-action="BudgetMonitoring">Budget Monitoring</a>
+            <a asp-controller="Program" asp-action="Performance">Performance Dashboard</a>
+        </nav>
+
+        <main class="main-content">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

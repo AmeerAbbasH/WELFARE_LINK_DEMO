@@ -1,0 +1,252 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WELFARE_Application_MVCF.Interfaces;
+using WELFARE_Application_MVCF.Models;
+using WELFARE_Application_MVCF.ViewModels;
+
+namespace WELFARE_Application_MVCF.Controllers
+{
+    public class ResourceController : Controller
+    {
+        private readonly IResourceService _resourceService;
+        private readonly IProgramService _programService;
+
+        public ResourceController(IResourceService resourceService, IProgramService programService)
+        {
+            _resourceService = resourceService;
+            _programService = programService;
+        }
+
+        // GET: Resource
+        public async Task<IActionResult> Index()
+        {
+            var resources = await _resourceService.GetAllResourcesAsync();
+            return View(resources);
+        }
+
+        // GET: Resource/AllocateForm
+        public async Task<IActionResult> AllocateForm()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            var activePrograms = programs.Where(p => p.Status == "Active");
+            ViewBag.Programs = new SelectList(activePrograms, "ProgramID", "Title");
+            return View(new Resource());
+        }
+
+        // POST: Resource/AllocateForm
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AllocateForm([Bind("ProgramID,Type,Quantity")] Resource resource)
+        {
+            // Remove Status and Program navigation property from validation
+            ModelState.Remove("Status");
+            ModelState.Remove("Program");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _resourceService.AddResourceAsync(resource);
+                    TempData["SuccessMessage"] = "Resource allocated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            var programs = await _programService.GetAllProgramsAsync();
+            var activePrograms = programs.Where(p => p.Status == "Active");
+            ViewBag.Programs = new SelectList(activePrograms, "ProgramID", "Title", resource.ProgramID);
+            return View(resource);
+        }
+
+        // GET: Resource/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetAllResourcesAsync();
+            var resource = resources.FirstOrDefault(r => r.ResourceID == id);
+
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
+            return View(resource);
+        }
+
+        // GET: Resource/Create
+        public async Task<IActionResult> Create(int? programId)
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            var activePrograms = programs.Where(p => p.Status == "Active");
+
+            ViewBag.Programs = new SelectList(activePrograms, "ProgramID", "Title", programId);
+            ViewBag.ResourceTypes = new SelectList(new[] { "Funds", "Materials" });
+
+            if (programId.HasValue)
+            {
+                var program = await _programService.GetProgramByIdAsync(programId.Value);
+                ViewBag.ProgramTitle = program?.Title;
+                ViewBag.ProgramBudget = program?.Budget;
+            }
+
+            return View();
+        }
+
+        // POST: Resource/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ProgramID,Type,Quantity")] Resource resource)
+        {
+            // Remove Status and Program navigation property from validation
+            ModelState.Remove("Status");
+            ModelState.Remove("Program");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _resourceService.AddResourceAsync(resource);
+                    TempData["SuccessMessage"] = "Resource allocated successfully!";
+                    return RedirectToAction(nameof(ManageResources), new { programId = resource.ProgramID });
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            var programs = await _programService.GetAllProgramsAsync();
+            var activePrograms = programs.Where(p => p.Status == "Active");
+            ViewBag.Programs = new SelectList(activePrograms, "ProgramID", "Title", resource.ProgramID);
+            ViewBag.ResourceTypes = new SelectList(new[] { "Funds", "Materials" }, resource.Type);
+            return View(resource);
+        }
+
+        // GET: Resource/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetAllResourcesAsync();
+            var resource = resources.FirstOrDefault(r => r.ResourceID == id);
+
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title", resource.ProgramID);
+            ViewBag.ResourceTypes = new SelectList(new[] { "Funds", "Materials" }, resource.Type);
+            ViewBag.ResourceStatuses = new SelectList(new[] { "Available", "Depleted", "Reserved" }, resource.Status);
+            return View(resource);
+        }
+
+        // POST: Resource/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ResourceID,ProgramID,Type,Quantity,Status")] Resource resource)
+        {
+            if (id != resource.ResourceID)
+            {
+                return NotFound();
+            }
+
+            // Remove Program navigation property from validation
+            ModelState.Remove("Program");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _resourceService.UpdateResourceAsync(resource);
+                    TempData["SuccessMessage"] = "Resource updated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            var programs = await _programService.GetAllProgramsAsync();
+            ViewBag.Programs = new SelectList(programs, "ProgramID", "Title", resource.ProgramID);
+            ViewBag.ResourceTypes = new SelectList(new[] { "Funds", "Materials" }, resource.Type);
+            ViewBag.ResourceStatuses = new SelectList(new[] { "Available", "Depleted", "Reserved" }, resource.Status);
+            return View(resource);
+        }
+
+        // GET: Resource/ManageResources/5 (by Program)
+        public async Task<IActionResult> ManageResources(int? programId)
+        {
+            if (programId == null)
+            {
+                return RedirectToAction("Index", "Program");
+            }
+
+            var program = await _programService.GetProgramByIdAsync(programId.Value);
+            if (program == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetResourcesByProgramIdAsync(programId.Value);
+
+            ViewBag.Program = program;
+            ViewBag.ProgramTitle = program.Title;
+            ViewBag.ProgramBudget = program.Budget;
+
+            var totalAllocated = resources
+                .Where(r => r.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+                .Sum(r => r.Quantity);
+
+            ViewBag.TotalAllocated = totalAllocated;
+            ViewBag.RemainingBudget = program.Budget - totalAllocated;
+            ViewBag.UtilisationPercentage = program.Budget > 0 ? (totalAllocated / program.Budget) * 100 : 0;
+
+            return View(resources);
+        }
+
+        // GET: Resource/UtilisationReport
+        public async Task<IActionResult> UtilisationReport()
+        {
+            var resources = await _resourceService.GetAllResourcesAsync();
+            var utilisationViewModels = new List<ResourceUtilisationViewModel>();
+
+            foreach (var resource in resources)
+            {
+                var usedQuantity = 0m;
+                var remainingQuantity = resource.Quantity - usedQuantity;
+                var utilisationPercentage = resource.Quantity > 0 
+                    ? (usedQuantity / resource.Quantity) * 100 
+                    : 0;
+
+                utilisationViewModels.Add(new ResourceUtilisationViewModel
+                {
+                    ResourceID = resource.ResourceID,
+                    Type = resource.Type,
+                    InitialQuantity = resource.Quantity,
+                    UsedQuantity = usedQuantity,
+                    RemainingQuantity = remainingQuantity,
+                    Status = resource.Status,
+                    ProgramID = resource.ProgramID,
+                    ProgramTitle = resource.Program?.Title ?? "Unknown",
+                    UtilisationPercentage = utilisationPercentage
+                });
+            }
+
+            return View(utilisationViewModels);
+        }
+    }
+}

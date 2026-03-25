@@ -1,0 +1,347 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using WELFARE_Application_MVCF.Interfaces;
+using WELFARE_Application_MVCF.Models;
+using WELFARE_Application_MVCF.ViewModels;
+
+namespace WELFARE_Application_MVCF.Controllers
+{
+    public class ProgramController : Controller
+    {
+        private readonly IProgramService _programService;
+        private readonly IResourceService _resourceService;
+
+        public ProgramController(IProgramService programService, IResourceService resourceService)
+        {
+            _programService = programService;
+            _resourceService = resourceService;
+        }
+
+        // GET: Program
+        public async Task<IActionResult> Index()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            return View(programs);
+        }
+
+        // GET: Program/Dashboard
+        public async Task<IActionResult> Dashboard()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            return View(programs);
+        }
+
+        // GET: Program/Manage
+        public async Task<IActionResult> Manage(int? id)
+        {
+            ViewBag.AllPrograms = await _programService.GetAllProgramsAsync();
+
+            if (id.HasValue && id.Value > 0)
+            {
+                // Load existing programme for editing
+                var existingProgram = await _programService.GetProgramByIdAsync(id.Value);
+                if (existingProgram == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.IsUpdate = true;
+                return View(existingProgram);
+            }
+            else
+            {
+                // Set default dates for new programme
+                var newProgram = new WelfareProgram
+                {
+                    StartDate = DateTime.Today,
+                    EndDate = DateTime.Today.AddMonths(6)
+                };
+                ViewBag.IsUpdate = false;
+                return View(newProgram);
+            }
+        }
+
+        // POST: Program/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Manage([Bind("ProgramID,Title,Description,StartDate,EndDate,Budget,Status")] WelfareProgram program)
+        {
+            // Remove Status validation for new programmes
+            if (program.ProgramID == 0)
+            {
+                ModelState.Remove("Status");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (program.ProgramID == 0)
+                    {
+                        await _programService.AddProgramAsync(program);
+                        TempData["SuccessMessage"] = "Programme created successfully!";
+                    }
+                    else
+                    {
+                        await _programService.UpdateProgramAsync(program);
+                        TempData["SuccessMessage"] = "Programme updated successfully!";
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            // If validation failed, reload form data
+            ViewBag.AllPrograms = await _programService.GetAllProgramsAsync();
+            if (program.StartDate == DateTime.MinValue)
+                program.StartDate = DateTime.Today;
+            if (program.EndDate == DateTime.MinValue)
+                program.EndDate = DateTime.Today.AddMonths(6);
+
+            return View(program);
+        }
+
+        // GET: Program/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var program = await _programService.GetProgramByIdAsync(id.Value);
+            if (program == null)
+            {
+                return NotFound();
+            }
+
+            var resources = await _resourceService.GetResourcesByProgramIdAsync(id.Value);
+
+            var totalAllocatedFunds = resources
+                .Where(r => r.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+                .Sum(r => r.Quantity);
+
+            var totalAllocatedMaterials = resources
+                .Where(r => r.Type.Equals("Materials", StringComparison.OrdinalIgnoreCase))
+                .Sum(r => r.Quantity);
+
+            var utilisationPercentage = program.Budget > 0 
+                ? (totalAllocatedFunds / program.Budget) * 100 
+                : 0;
+
+            var viewModel = new ProgramDetailViewModel
+            {
+                Program = program,
+                Resources = resources,
+                ApplicationCount = 0,
+                TotalAllocatedFunds = totalAllocatedFunds,
+                TotalAllocatedMaterials = totalAllocatedMaterials,
+                UtilisationPercentage = utilisationPercentage,
+                RemainingBudget = program.Budget - totalAllocatedFunds,
+                IsBudgetCritical = utilisationPercentage >= 80
+            };
+
+            return View(viewModel);
+        }
+
+        // GET: Program/Create
+        public IActionResult Create()
+        {
+            // Set default dates to today
+            var newProgram = new WelfareProgram
+            {
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today.AddMonths(6) // Default to 6 months from now
+            };
+            return View(newProgram);
+        }
+
+        // POST: Program/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ProgramID,Title,Description,StartDate,EndDate,Budget")] WelfareProgram program)
+        {
+            // Remove validation for Status since it's set automatically
+            ModelState.Remove("Status");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _programService.AddProgramAsync(program);
+                    TempData["SuccessMessage"] = "Programme created successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            // If we got here, something failed, redisplay form
+            if (program.StartDate == DateTime.MinValue)
+                program.StartDate = DateTime.Today;
+            if (program.EndDate == DateTime.MinValue)
+                program.EndDate = DateTime.Today.AddMonths(6);
+
+            return View(program);
+        }
+
+        // GET: Program/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var program = await _programService.GetProgramByIdAsync(id.Value);
+            if (program == null)
+            {
+                return NotFound();
+            }
+            return View(program);
+        }
+
+        // POST: Program/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ProgramID,Title,Description,StartDate,EndDate,Budget,Status")] WelfareProgram program)
+        {
+            if (id != program.ProgramID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _programService.UpdateProgramAsync(program);
+                    TempData["SuccessMessage"] = "Programme updated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+            return View(program);
+        }
+
+        // GET: Program/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var program = await _programService.GetProgramByIdAsync(id.Value);
+            if (program == null)
+            {
+                return NotFound();
+            }
+
+            return View(program);
+        }
+
+        // POST: Program/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _programService.DeleteProgramAsync(id);
+                TempData["SuccessMessage"] = "Programme deleted successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction(nameof(Delete), new { id });
+            }
+        }
+
+        // GET: Program/BudgetMonitoring
+        public async Task<IActionResult> BudgetMonitoring()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            var budgetViewModels = new List<BudgetMonitoringViewModel>();
+
+            foreach (var program in programs)
+            {
+                var resources = await _resourceService.GetResourcesByProgramIdAsync(program.ProgramID);
+                var allocatedFunds = resources
+                    .Where(r => r.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+                    .Sum(r => r.Quantity);
+
+                var utilisationPercentage = program.Budget > 0 
+                    ? (allocatedFunds / program.Budget) * 100 
+                    : 0;
+
+                budgetViewModels.Add(new BudgetMonitoringViewModel
+                {
+                    ProgramID = program.ProgramID,
+                    ProgramTitle = program.Title,
+                    TotalBudget = program.Budget,
+                    AllocatedFunds = allocatedFunds,
+                    DisbursedFunds = 0,
+                    RemainingBudget = program.Budget - allocatedFunds,
+                    UtilisationPercentage = utilisationPercentage,
+                    Status = program.Status,
+                    IsCritical = utilisationPercentage >= 80
+                });
+            }
+
+            var dashboardViewModel = new BudgetDashboardViewModel
+            {
+                ProgramBudgets = budgetViewModels,
+                TotalBudgetAllPrograms = budgetViewModels.Sum(b => b.TotalBudget),
+                TotalAllocated = budgetViewModels.Sum(b => b.AllocatedFunds),
+                TotalRemaining = budgetViewModels.Sum(b => b.RemainingBudget),
+                CriticalProgramsCount = budgetViewModels.Count(b => b.IsCritical)
+            };
+
+            return View(dashboardViewModel);
+        }
+
+        // GET: Program/Performance
+        public async Task<IActionResult> Performance()
+        {
+            var programs = await _programService.GetAllProgramsAsync();
+            var performanceViewModels = new List<ProgramPerformanceViewModel>();
+
+            foreach (var program in programs)
+            {
+                var resources = await _resourceService.GetResourcesByProgramIdAsync(program.ProgramID);
+                var allocatedFunds = resources
+                    .Where(r => r.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+                    .Sum(r => r.Quantity);
+
+                var budgetUtilisation = program.Budget > 0 
+                    ? (allocatedFunds / program.Budget) * 100 
+                    : 0;
+
+                performanceViewModels.Add(new ProgramPerformanceViewModel
+                {
+                    ProgramID = program.ProgramID,
+                    ProgramTitle = program.Title,
+                    TotalApplications = 0,
+                    ApprovedApplications = 0,
+                    RejectedApplications = 0,
+                    PendingApplications = 0,
+                    ApprovalRate = 0,
+                    BenefitsDisbursed = 0,
+                    CitizenCount = 0,
+                    BudgetUtilisation = budgetUtilisation,
+                    Status = program.Status
+                });
+            }
+
+            return View(performanceViewModels);
+        }
+    }
+}

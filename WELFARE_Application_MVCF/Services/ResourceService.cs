@@ -1,0 +1,87 @@
+using WELFARE_Application_MVCF.Interfaces;
+using WELFARE_Application_MVCF.Models;
+
+namespace WELFARE_Application_MVCF.Services
+{
+    public class ResourceService : IResourceService
+    {
+        private readonly IResourceRepository _resourceRepository;
+        private readonly IProgramRepository _programRepository;
+
+        public ResourceService(IResourceRepository resourceRepository, IProgramRepository programRepository)
+        {
+            _resourceRepository = resourceRepository;
+            _programRepository = programRepository;
+        }
+
+        public async Task<IEnumerable<Resource>> GetAllResourcesAsync()
+        {
+            return await _resourceRepository.GetAllResourcesAsync();
+        }
+
+        public async Task<IEnumerable<Resource>> GetResourcesByProgramIdAsync(int programId)
+        {
+            return await _resourceRepository.GetResourcesByProgramIdAsync(programId);
+        }
+
+        public async Task AddResourceAsync(Resource resource)
+        {
+            await ValidateProgramExists(resource.ProgramID);
+            ValidateResourceQuantity(resource);
+            await ValidateResourceAgainstBudget(resource);
+
+            resource.Status = "Available";
+
+            await _resourceRepository.AddResourcesAsync(resource);
+        }
+
+        public async Task UpdateResourceAsync(Resource resource)
+        {
+            await ValidateProgramExists(resource.ProgramID);
+            ValidateResourceQuantity(resource);
+
+            await _resourceRepository.UpdateResourceAsync(resource);
+        }
+
+        private async Task ValidateProgramExists(int programId)
+        {
+            var program = await _programRepository.GetProgramByIdAsync(programId);
+            if (program == null)
+            {
+                throw new InvalidOperationException($"Program with ID {programId} not found.");
+            }
+
+            if (program.Status != "Active")
+            {
+                throw new InvalidOperationException("Cannot allocate resources to a non-active programme.");
+            }
+        }
+
+        private void ValidateResourceQuantity(Resource resource)
+        {
+            if (resource.Quantity <= 0)
+            {
+                throw new InvalidOperationException("Resource quantity must be greater than zero.");
+            }
+        }
+
+        private async Task ValidateResourceAgainstBudget(Resource resource)
+        {
+            var program = await _programRepository.GetProgramByIdAsync(resource.ProgramID);
+            var existingResources = await _resourceRepository.GetResourcesByProgramIdAsync(resource.ProgramID);
+
+            if (resource.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+            {
+                var totalFunds = existingResources
+                    .Where(r => r.Type.Equals("Funds", StringComparison.OrdinalIgnoreCase))
+                    .Sum(r => r.Quantity);
+
+                if (totalFunds + resource.Quantity > program.Budget)
+                {
+                    throw new InvalidOperationException(
+                        $"Total allocated funds ({totalFunds + resource.Quantity:C}) would exceed programme budget ({program.Budget:C}).");
+                }
+            }
+        }
+    }
+}

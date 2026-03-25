@@ -1,0 +1,14 @@
+﻿namespace WELFARE_Application_MVCF.ViewModels
+{
+    public class ProgramDetailViewModel
+    {
+        public Models.Program Program { get; set; }
+        public IEnumerable<Models.Resource> Resources { get; set; }
+        public int ApplicationCount { get; set; }
+        public decimal TotalAllocatedFunds { get; set; }
+        public decimal TotalAllocatedMaterials { get; set; }
+        public decimal UtilisationPercentage { get; set; }
+        public decimal RemainingBudget { get; set; }
+        public bool IsBudgetCritical { get; set; }
+    }
+}
