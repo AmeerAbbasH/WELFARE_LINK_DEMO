@@ -1,0 +1,59 @@
+﻿@model WelfareLinkPRJ.Models.Disbursement
+
+@{
+    ViewData["Title"] = "Disbursement Details";
+}
+
+<h1>Disbursement Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DisbursementID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DisbursementID)
+        </dd>
+        
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Benefit)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Benefit.Type)
+        </dd>
+        
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CitizenID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CitizenID)
+        </dd>
+        
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.OfficerID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.OfficerID)
+        </dd>
+        
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.DisbursementID" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

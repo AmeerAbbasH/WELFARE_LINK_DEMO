@@ -1,0 +1,361 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.Models;
+
+namespace WelfareLinkPRJ.Controllers
+{
+    public class DisbursementController : Controller
+    {
+        private readonly IDisbursementService _disbursementService;
+        private readonly IBenefitService _benefitService;
+
+        public DisbursementController(IDisbursementService disbursementService, IBenefitService benefitService)
+        {
+            _disbursementService = disbursementService;
+            _benefitService = benefitService;
+        }
+
+        // GET: Disbursement
+        public async Task<IActionResult> Index()
+        {
+            try
+            {
+                var disbursements = await _disbursementService.GetAllDisbursementsAsync();
+                return View(disbursements);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error loading disbursements: {ex.Message}";
+                return View(new List<Disbursement>());
+            }
+        }
+
+        // GET: Disbursement/History
+        public async Task<IActionResult> History(DateTime? startDate, DateTime? endDate, string? benefitType, int? officerId, string? status)
+        {
+            var disbursements = await _disbursementService.GetAllDisbursementsAsync();
+            var benefits = await _benefitService.GetAllBenefitsAsync();
+
+            // Apply filters
+            if (startDate.HasValue)
+            {
+                disbursements = disbursements.Where(d => d.Date >= startDate.Value);
+            }
+            if (endDate.HasValue)
+            {
+                disbursements = disbursements.Where(d => d.Date <= endDate.Value);
+            }
+            if (!string.IsNullOrEmpty(benefitType))
+            {
+                disbursements = disbursements.Where(d => d.Benefit != null && d.Benefit.Type == benefitType);
+            }
+            if (officerId.HasValue)
+            {
+                disbursements = disbursements.Where(d => d.OfficerID == officerId.Value);
+            }
+            if (!string.IsNullOrEmpty(status))
+            {
+                disbursements = disbursements.Where(d => d.Status == status);
+            }
+
+            // Populate filter dropdowns
+            ViewBag.BenefitTypes = benefits.Select(b => b.Type).Distinct().ToList();
+            ViewBag.Statuses = new List<string> { "Completed", "Pending", "Failed" };
+            ViewBag.OfficerIds = disbursements.Select(d => d.OfficerID).Distinct().OrderBy(o => o).ToList();
+
+            // Pass current filter values
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
+            ViewBag.SelectedBenefitType = benefitType;
+            ViewBag.SelectedOfficerId = officerId;
+            ViewBag.SelectedStatus = status;
+
+            return View(disbursements.ToList());
+        }
+
+        // GET: Disbursement/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                TempData["ErrorMessage"] = "Disbursement ID is required.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+                if (disbursement == null)
+                {
+                    TempData["ErrorMessage"] = $"Disbursement with ID {id} was not found.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(disbursement);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error loading disbursement details: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // GET: Disbursement/Create
+        public async Task<IActionResult> Create()
+        {
+            try
+            {
+                await PopulateBenefitDropdownWithBalance();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error loading create form: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // POST: Disbursement/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("DisbursementID,BenefitID,CitizenID,OfficerID,Amount,Date,Status")] Disbursement disbursement)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _disbursementService.CreateDisbursementAsync(disbursement);
+                    TempData["SuccessMessage"] = "Disbursement created successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"An unexpected error occurred: {ex.Message}");
+            }
+
+            await PopulateBenefitDropdownWithBalance(disbursement.BenefitID);
+            return View(disbursement);
+        }
+
+        // GET: Disbursement/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                TempData["ErrorMessage"] = "Disbursement ID is required.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+                if (disbursement == null)
+                {
+                    TempData["ErrorMessage"] = $"Disbursement with ID {id} was not found.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                await PopulateBenefitDropdownWithBalance(disbursement.BenefitID);
+
+                // Pass remaining balance info for client-side validation
+                var benefit = await _benefitService.GetBenefitByIdAsync(disbursement.BenefitID);
+                if (benefit != null)
+                {
+                    var disbursements = await _disbursementService.GetDisbursementsByBenefitIdAsync(disbursement.BenefitID);
+                    var totalDisbursed = disbursements
+                        .Where(d => d.Status == "Completed" && d.DisbursementID != disbursement.DisbursementID)
+                        .Sum(d => d.Amount);
+                    ViewBag.RemainingBalance = benefit.Amount - totalDisbursed;
+                    ViewBag.BenefitAmount = benefit.Amount;
+                    ViewBag.TotalDisbursed = totalDisbursed;
+                }
+
+                return View(disbursement);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error loading disbursement: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // POST: Disbursement/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("DisbursementID,BenefitID,CitizenID,OfficerID,Amount,Date,Status")] Disbursement disbursement)
+        {
+            if (id != disbursement.DisbursementID)
+            {
+                TempData["ErrorMessage"] = "Invalid disbursement ID.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (!await _disbursementService.DisbursementExistsAsync(disbursement.DisbursementID))
+                    {
+                        TempData["ErrorMessage"] = $"Disbursement with ID {id} no longer exists.";
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    await _disbursementService.UpdateDisbursementAsync(disbursement);
+                    TempData["SuccessMessage"] = "Disbursement updated successfully!";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"An unexpected error occurred: {ex.Message}");
+            }
+
+            await PopulateBenefitDropdownWithBalance(disbursement.BenefitID);
+            return View(disbursement);
+        }
+
+        // GET: Disbursement/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                TempData["ErrorMessage"] = "Disbursement ID is required.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+                if (disbursement == null)
+                {
+                    TempData["ErrorMessage"] = $"Disbursement with ID {id} was not found.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(disbursement);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error loading disbursement: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // POST: Disbursement/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _disbursementService.DeleteDisbursementAsync(id);
+                TempData["SuccessMessage"] = "Disbursement deleted successfully!";
+            }
+            catch (ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error deleting disbursement: {ex.Message}";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // API endpoint to get benefit remaining balance for client-side validation
+        [HttpGet]
+        public async Task<IActionResult> GetBenefitRemainingBalance(int benefitId, int? excludeDisbursementId = null)
+        {
+            try
+            {
+                var benefit = await _benefitService.GetBenefitByIdAsync(benefitId);
+                if (benefit == null)
+                {
+                    return Json(new { success = false, message = "Benefit not found." });
+                }
+
+                var disbursements = await _disbursementService.GetDisbursementsByBenefitIdAsync(benefitId);
+                var totalDisbursed = disbursements
+                    .Where(d => d.Status == "Completed" && d.DisbursementID != excludeDisbursementId)
+                    .Sum(d => d.Amount);
+                var totalPending = disbursements
+                    .Where(d => d.Status == "Pending" && d.DisbursementID != excludeDisbursementId)
+                    .Sum(d => d.Amount);
+
+                var remainingBalance = benefit.Amount - totalDisbursed;
+
+                return Json(new
+                {
+                    success = true,
+                    benefitAmount = benefit.Amount,
+                    totalDisbursed,
+                    totalPending,
+                    remainingBalance,
+                    benefitType = benefit.Type,
+                    benefitStatus = benefit.Status
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        private async Task PopulateBenefitDropdownWithBalance(int? selectedBenefitId = null)
+        {
+            var benefits = await _benefitService.GetAllBenefitsAsync();
+            var benefitList = new List<SelectListItem>();
+
+            foreach (var b in benefits)
+            {
+                var disbursements = await _disbursementService.GetDisbursementsByBenefitIdAsync(b.BenefitID);
+                var totalDisbursed = disbursements.Where(d => d.Status == "Completed").Sum(d => d.Amount);
+                var remaining = b.Amount - totalDisbursed;
+
+                benefitList.Add(new SelectListItem
+                {
+                    Value = b.BenefitID.ToString(),
+                    Text = $"ID: {b.BenefitID} | {b.Type} | Total: ₹{b.Amount:N2} | Remaining: ₹{remaining:N2}",
+                    Selected = b.BenefitID == selectedBenefitId
+                });
+            }
+
+            ViewData["BenefitID"] = new SelectList(benefitList, "Value", "Text", selectedBenefitId);
+        }
+
+        private async Task PopulateBenefitDropdown(int? selectedBenefitId = null)
+        {
+            var benefits = await _benefitService.GetAllBenefitsAsync();
+            var benefitList = benefits.Select(b => new SelectListItem
+            {
+                Value = b.BenefitID.ToString(),
+                Text = $"{b.BenefitID} - {b.Type} - {b.Amount:C}",
+                Selected = b.BenefitID == selectedBenefitId
+            });
+            ViewData["BenefitID"] = new SelectList(benefitList, "Value", "Text", selectedBenefitId);
+        }
+    }
+}

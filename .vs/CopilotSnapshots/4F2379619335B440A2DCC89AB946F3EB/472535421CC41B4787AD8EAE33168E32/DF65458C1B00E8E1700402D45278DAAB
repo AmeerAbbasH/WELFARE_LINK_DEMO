@@ -1,0 +1,50 @@
+﻿using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.Models;
+
+namespace WelfareLinkPRJ.Services
+{
+    public class DisbursementService : IDisbursementService
+    {
+        private readonly IDisbursementRepository _disbursementRepository;
+
+        public DisbursementService(IDisbursementRepository disbursementRepository)
+        {
+            _disbursementRepository = disbursementRepository;
+        }
+
+        public async Task<IEnumerable<Disbursement>> GetAllDisbursementsAsync()
+        {
+            return await _disbursementRepository.GetAllAsync();
+        }
+
+        public async Task<Disbursement?> GetDisbursementByIdAsync(int id)
+        {
+            return await _disbursementRepository.GetByIdAsync(id);
+        }
+
+        public async Task<Disbursement> CreateDisbursementAsync(Disbursement disbursement)
+        {
+            return await _disbursementRepository.AddAsync(disbursement);
+        }
+
+        public async Task<Disbursement> UpdateDisbursementAsync(Disbursement disbursement)
+        {
+            return await _disbursementRepository.UpdateAsync(disbursement);
+        }
+
+        public async Task<bool> DeleteDisbursementAsync(int id)
+        {
+            return await _disbursementRepository.DeleteAsync(id);
+        }
+
+        public async Task<bool> DisbursementExistsAsync(int id)
+        {
+            return await _disbursementRepository.ExistsAsync(id);
+        }
+
+        public async Task<IEnumerable<Disbursement>> GetDisbursementsByBenefitIdAsync(int benefitId)
+        {
+            return await _disbursementRepository.GetByBenefitIdAsync(benefitId);
+        }
+    }
+}

@@ -1,0 +1,189 @@
+﻿@model WelfareLinkPRJ.Models.Disbursement
+
+@{
+    ViewData["Title"] = "Edit Disbursement";
+    var remainingBalance = ViewBag.RemainingBalance ?? 0.0;
+    var benefitAmount = ViewBag.BenefitAmount ?? 0.0;
+    var totalDisbursed = ViewBag.TotalDisbursed ?? 0.0;
+}
+
+<div class="page-header">
+    <h1><i class="bi bi-pencil-square"></i> Edit Disbursement #@Model?.DisbursementID</h1>
+    <a asp-action="Index" class="btn-modern btn-secondary-modern">
+        <i class="bi bi-arrow-left"></i> Back to List
+    </a>
+</div>
+
+<div class="content-card">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Benefit Info Card -->
+            <div class="alert alert-info mb-4">
+                <h5><i class="bi bi-info-circle"></i> Benefit Information</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>Total Benefit Amount:</strong>
+                        <span>₹@string.Format("{0:N2}", benefitAmount)</span>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Already Disbursed:</strong>
+                        <span>₹@string.Format("{0:N2}", totalDisbursed)</span>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Remaining Balance:</strong>
+                        <span id="remainingBalanceDisplay" class="fw-bold @(Convert.ToDouble(remainingBalance) <= 0 ? "text-danger" : "text-success")">₹@string.Format("{0:N2}", remainingBalance)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amount Validation Alert -->
+            <div id="amountValidationAlert" class="alert alert-danger mb-4" style="display: none;">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span id="amountValidationMessage"></span>
+            </div>
+
+            <form asp-action="Edit" class="needs-validation" novalidate id="disbursementForm">
+                <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+                <input type="hidden" asp-for="DisbursementID" />
+
+                <div class="row g-4">
+                    <div class="col-md-12">
+                        <div class="form-floating-modern">
+                            <label asp-for="BenefitID" class="form-label-modern">
+                                <i class="bi bi-gift"></i> Select Benefit
+                            </label>
+                            <select asp-for="BenefitID" class="form-select" asp-items="ViewBag.BenefitID" disabled>
+                                <option value="">-- Choose a Benefit --</option>
+                            </select>
+                            <input type="hidden" asp-for="BenefitID" />
+                            <span asp-validation-for="BenefitID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating-modern">
+                            <label asp-for="Amount" class="form-label-modern">
+                                <i class="bi bi-currency-rupee"></i> Disbursement Amount
+                            </label>
+                            <input asp-for="Amount" class="form-control" id="amountInput" min="0.01" step="0.01" />
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                            <small class="text-muted">Enter amount to disburse. If less than pending, balance will remain pending.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating-modern">
+                            <label asp-for="CitizenID" class="form-label-modern">
+                                <i class="bi bi-person-circle"></i> Citizen ID
+                            </label>
+                            <input asp-for="CitizenID" class="form-control" min="1" />
+                            <span asp-validation-for="CitizenID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating-modern">
+                            <label asp-for="OfficerID" class="form-label-modern">
+                                <i class="bi bi-person-badge"></i> Officer ID
+                            </label>
+                            <input asp-for="OfficerID" class="form-control" min="1" />
+                            <span asp-validation-for="OfficerID" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating-modern">
+                            <label asp-for="Date" class="form-label-modern">
+                                <i class="bi bi-calendar-event"></i> Disbursement Date
+                            </label>
+                            <input asp-for="Date" type="date" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating-modern">
+                            <label asp-for="Status" class="form-label-modern">
+                                <i class="bi bi-flag"></i> Status
+                            </label>
+                            <select asp-for="Status" class="form-select" id="statusSelect">
+                                <option value="">Select Status</option>
+                                <option value="Completed">✅ Completed</option>
+                                <option value="Pending">⏳ Pending</option>
+                                <option value="Failed">❌ Failed</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="d-flex gap-3 justify-content-end">
+                    <a asp-action="Index" class="btn-modern btn-secondary-modern">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn-modern btn-primary-modern" id="submitBtn">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        const remainingBalance = @Html.Raw(Json.Serialize(remainingBalance));
+
+        document.getElementById('amountInput').addEventListener('input', validateAmount);
+        document.getElementById('statusSelect').addEventListener('change', validateAmount);
+
+        function validateAmount() {
+            const amount = parseFloat(document.getElementById('amountInput').value) || 0;
+            const status = document.getElementById('statusSelect').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (amount <= 0) {
+                showAmountError('Disbursement amount must be greater than zero.');
+                submitBtn.disabled = true;
+                return false;
+            }
+
+            // Only validate against remaining balance for "Completed" status
+            if (status === 'Completed' && remainingBalance > 0 && amount > remainingBalance) {
+                showAmountError(`Amount (₹${amount.toLocaleString('en-IN', {minimumFractionDigits: 2})}) exceeds remaining balance (₹${remainingBalance.toLocaleString('en-IN', {minimumFractionDigits: 2})}). Please enter an amount ≤ ₹${remainingBalance.toLocaleString('en-IN', {minimumFractionDigits: 2})}.`);
+                submitBtn.disabled = true;
+                return false;
+            }
+
+            hideAmountError();
+            submitBtn.disabled = false;
+            return true;
+        }
+
+        function showAmountError(message) {
+            document.getElementById('amountValidationAlert').style.display = 'block';
+            document.getElementById('amountValidationMessage').textContent = message;
+            document.getElementById('amountInput').classList.add('is-invalid');
+        }
+
+        function hideAmountError() {
+            document.getElementById('amountValidationAlert').style.display = 'none';
+            document.getElementById('amountInput').classList.remove('is-invalid');
+        }
+
+        // Form submission validation
+        document.getElementById('disbursementForm').addEventListener('submit', function(e) {
+            if (!validateAmount()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Initial validation
+        validateAmount();
+    </script>
+}

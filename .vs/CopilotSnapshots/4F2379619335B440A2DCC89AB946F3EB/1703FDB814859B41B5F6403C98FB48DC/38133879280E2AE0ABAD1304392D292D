@@ -1,0 +1,103 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.ViewModels;
+
+namespace WelfareLinkPRJ.Controllers
+{
+    public class AnalyticsController : Controller
+    {
+        private readonly IBenefitService _benefitService;
+        private readonly IDisbursementService _disbursementService;
+
+        public AnalyticsController(IBenefitService benefitService, IDisbursementService disbursementService)
+        {
+            _benefitService = benefitService;
+            _disbursementService = disbursementService;
+        }
+
+        // GET: Analytics/Dashboard
+        public async Task<IActionResult> Dashboard()
+        {
+            var benefits = (await _benefitService.GetAllBenefitsAsync()).ToList();
+            var disbursements = (await _disbursementService.GetAllDisbursementsAsync()).ToList();
+
+            var viewModel = new AnalyticsDashboardViewModel
+            {
+                // Summary Metrics
+                TotalAllocated = benefits.Count,
+                TotalDisbursed = disbursements.Count(d => d.Status == "Completed"),
+                TotalPending = disbursements.Count(d => d.Status == "Pending"),
+                TotalFailed = disbursements.Count(d => d.Status == "Failed"),
+
+                // Financial Metrics
+                TotalAmountAllocated = benefits.Sum(b => b.Amount),
+                TotalAmountDisbursed = benefits
+                    .Where(b => b.Status == "Disbursed" || disbursements.Any(d => d.BenefitID == b.BenefitID && d.Status == "Completed"))
+                    .Sum(b => b.Amount),
+
+                // Efficiency Metrics
+                DisbursementEfficiency = benefits.Count > 0
+                    ? Math.Round((double)disbursements.Count(d => d.Status == "Completed") / benefits.Count * 100, 1)
+                    : 0,
+                AllocationRate = benefits.Count > 0
+                    ? Math.Round((double)benefits.Count(b => b.Status == "Allocated") / benefits.Count * 100, 1)
+                    : 0,
+
+                // Benefit Type Breakdown
+                BenefitTypeBreakdowns = benefits
+                    .GroupBy(b => b.Type)
+                    .Select(g => new BenefitTypeBreakdown
+                    {
+                        Type = g.Key,
+                        Count = g.Count(),
+                        TotalAmount = g.Sum(b => b.Amount),
+                        DisbursedCount = disbursements.Count(d => d.Benefit != null && d.Benefit.Type == g.Key && d.Status == "Completed"),
+                        Percentage = benefits.Count > 0 ? Math.Round((double)g.Count() / benefits.Count * 100, 1) : 0
+                    })
+                    .OrderByDescending(b => b.Count)
+                    .ToList(),
+
+                // Recent Disbursements
+                RecentDisbursements = disbursements
+                    .OrderByDescending(d => d.Date)
+                    .Take(5)
+                    .Select(d => new RecentDisbursement
+                    {
+                        DisbursementID = d.DisbursementID,
+                        BenefitType = d.Benefit?.Type ?? "N/A",
+                        CitizenID = d.CitizenID,
+                        Date = d.Date,
+                        Status = d.Status
+                    })
+                    .ToList(),
+
+                // Monthly Trends (last 6 months)
+                MonthlyTrends = GetMonthlyTrends(benefits, disbursements)
+            };
+
+            return View(viewModel);
+        }
+
+        private List<MonthlyTrend> GetMonthlyTrends(List<Models.Benefit> benefits, List<Models.Disbursement> disbursements)
+        {
+            var trends = new List<MonthlyTrend>();
+            var today = DateTime.Today;
+
+            for (int i = 5; i >= 0; i--)
+            {
+                var month = today.AddMonths(-i);
+                var monthStart = new DateTime(month.Year, month.Month, 1);
+                var monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+                trends.Add(new MonthlyTrend
+                {
+                    Month = month.ToString("MMM yyyy"),
+                    Allocated = benefits.Count(b => b.Date >= monthStart && b.Date <= monthEnd),
+                    Disbursed = disbursements.Count(d => d.Date >= monthStart && d.Date <= monthEnd && d.Status == "Completed")
+                });
+            }
+
+            return trends;
+        }
+    }
+}

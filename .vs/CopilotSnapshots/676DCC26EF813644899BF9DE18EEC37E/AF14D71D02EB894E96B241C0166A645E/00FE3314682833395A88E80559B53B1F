@@ -1,0 +1,43 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WelfareLinkPRJ.Models
+{
+    public class Disbursement
+    {
+        [Key]
+        public int DisbursementID { get; set; }
+
+        [Required(ErrorMessage = "Please select a benefit.")]
+        [ForeignKey("Benefit")]
+        [Display(Name = "Benefit")]
+        public int BenefitID { get; set; }
+
+        [Display(Name = "Citizen ID")]
+        [Range(0, 999999999, ErrorMessage = "Citizen ID must be between 0 and 999999999.")]
+        public int CitizenID { get; set; }
+
+        [Display(Name = "Officer ID")]
+        [Range(0, 999999, ErrorMessage = "Officer ID must be between 0 and 999999.")]
+        public int OfficerID { get; set; }
+
+        [Required(ErrorMessage = "Amount is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than zero.")]
+        [Display(Name = "Disbursement Amount")]
+        public double Amount { get; set; }  // Amount disbursed in this transaction
+
+        [Required(ErrorMessage = "Date is required.")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Disbursement Date")]
+        public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Status is required.")]
+        [Display(Name = "Status")]
+        public string Status { get; set; } = string.Empty;
+
+        //navigation property
+        //means one disbursement belongs to one benefit
+        public virtual Benefit? Benefit { get; set; }
+
+    }
+}

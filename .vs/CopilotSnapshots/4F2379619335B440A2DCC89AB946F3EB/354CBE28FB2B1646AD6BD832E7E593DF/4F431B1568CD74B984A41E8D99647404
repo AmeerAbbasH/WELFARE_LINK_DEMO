@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WelfareLinkPRJ.Models.Disbursement>
+
+@{
+    ViewData["Title"] = "Disbursements";
+}
+
+<h1>Disbursements</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DisbursementID)</th>
+            <th>@Html.DisplayNameFor(model => model.Benefit)</th>
+            <th>@Html.DisplayNameFor(model => model.CitizenID)</th>
+            <th>@Html.DisplayNameFor(model => model.OfficerID)</th>
+            <th>@Html.DisplayNameFor(model => model.Date)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DisbursementID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Benefit.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.CitizenID)</td>
+                <td>@Html.DisplayFor(modelItem => item.OfficerID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DisbursementID" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.DisbursementID" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.DisbursementID" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

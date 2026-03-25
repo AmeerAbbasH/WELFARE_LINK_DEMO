@@ -1,0 +1,132 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.Models;
+
+namespace WelfareLinkPRJ.Controllers
+{
+    public class DisbursementController : Controller
+    {
+        private readonly IDisbursementService _disbursementService;
+        private readonly IBenefitService _benefitService;
+
+        public DisbursementController(IDisbursementService disbursementService, IBenefitService benefitService)
+        {
+            _disbursementService = disbursementService;
+            _benefitService = benefitService;
+        }
+
+        // GET: Disbursement
+        public async Task<IActionResult> Index()
+        {
+            var disbursements = await _disbursementService.GetAllDisbursementsAsync();
+            return View(disbursements);
+        }
+
+        // GET: Disbursement/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+            if (disbursement == null)
+            {
+                return NotFound();
+            }
+
+            return View(disbursement);
+        }
+
+        // GET: Disbursement/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewData["BenefitID"] = new SelectList(await _benefitService.GetAllBenefitsAsync(), "BenefitID", "Type");
+            return View();
+        }
+
+        // POST: Disbursement/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("DisbursementID,BenefitID,CitizenID,OfficerID,Date,Status")] Disbursement disbursement)
+        {
+            if (ModelState.IsValid)
+            {
+                await _disbursementService.CreateDisbursementAsync(disbursement);
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["BenefitID"] = new SelectList(await _benefitService.GetAllBenefitsAsync(), "BenefitID", "Type", disbursement.BenefitID);
+            return View(disbursement);
+        }
+
+        // GET: Disbursement/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+            if (disbursement == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["BenefitID"] = new SelectList(await _benefitService.GetAllBenefitsAsync(), "BenefitID", "Type", disbursement.BenefitID);
+            return View(disbursement);
+        }
+
+        // POST: Disbursement/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("DisbursementID,BenefitID,CitizenID,OfficerID,Date,Status")] Disbursement disbursement)
+        {
+            if (id != disbursement.DisbursementID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (!await _disbursementService.DisbursementExistsAsync(disbursement.DisbursementID))
+                {
+                    return NotFound();
+                }
+
+                await _disbursementService.UpdateDisbursementAsync(disbursement);
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["BenefitID"] = new SelectList(await _benefitService.GetAllBenefitsAsync(), "BenefitID", "Type", disbursement.BenefitID);
+            return View(disbursement);
+        }
+
+        // GET: Disbursement/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var disbursement = await _disbursementService.GetDisbursementByIdAsync(id.Value);
+            if (disbursement == null)
+            {
+                return NotFound();
+            }
+
+            return View(disbursement);
+        }
+
+        // POST: Disbursement/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _disbursementService.DeleteDisbursementAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+    }
+}

@@ -1,0 +1,175 @@
+﻿using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.Models;
+
+namespace WelfareLinkPRJ.Services
+{
+    public class DisbursementService : IDisbursementService
+    {
+        private readonly IDisbursementRepository _disbursementRepository;
+        private readonly IBenefitRepository _benefitRepository;
+        private readonly string[] _validStatuses = { "Completed", "Pending", "Failed" };
+
+        public DisbursementService(IDisbursementRepository disbursementRepository, IBenefitRepository benefitRepository)
+        {
+            _disbursementRepository = disbursementRepository;
+            _benefitRepository = benefitRepository;
+        }
+
+        public async Task<IEnumerable<Disbursement>> GetAllDisbursementsAsync()
+        {
+            return await _disbursementRepository.GetAllAsync();
+        }
+
+        public async Task<Disbursement?> GetDisbursementByIdAsync(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Disbursement ID must be greater than zero.", nameof(id));
+            }
+            return await _disbursementRepository.GetByIdAsync(id);
+        }
+
+        public async Task<Disbursement> CreateDisbursementAsync(Disbursement disbursement)
+        {
+            await ValidateDisbursementAsync(disbursement);
+            return await _disbursementRepository.AddAsync(disbursement);
+        }
+
+        public async Task<Disbursement> UpdateDisbursementAsync(Disbursement disbursement)
+        {
+            if (disbursement.DisbursementID <= 0)
+            {
+                throw new ArgumentException("Disbursement ID must be greater than zero.", nameof(disbursement.DisbursementID));
+            }
+
+            if (!await _disbursementRepository.ExistsAsync(disbursement.DisbursementID))
+            {
+                throw new InvalidOperationException($"Disbursement with ID {disbursement.DisbursementID} does not exist.");
+            }
+
+            await ValidateDisbursementAsync(disbursement);
+            return await _disbursementRepository.UpdateAsync(disbursement);
+        }
+
+        public async Task<bool> DeleteDisbursementAsync(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Disbursement ID must be greater than zero.", nameof(id));
+            }
+
+            if (!await _disbursementRepository.ExistsAsync(id))
+            {
+                throw new InvalidOperationException($"Disbursement with ID {id} does not exist.");
+            }
+
+            return await _disbursementRepository.DeleteAsync(id);
+        }
+
+        public async Task<bool> DisbursementExistsAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return false;
+            }
+            return await _disbursementRepository.ExistsAsync(id);
+        }
+
+        public async Task<IEnumerable<Disbursement>> GetDisbursementsByBenefitIdAsync(int benefitId)
+        {
+            if (benefitId <= 0)
+            {
+                throw new ArgumentException("Benefit ID must be greater than zero.", nameof(benefitId));
+            }
+            return await _disbursementRepository.GetByBenefitIdAsync(benefitId);
+        }
+
+        #region Private Validation Methods
+
+        private async Task ValidateDisbursementAsync(Disbursement disbursement)
+        {
+            if (disbursement == null)
+            {
+                throw new ArgumentNullException(nameof(disbursement), "Disbursement cannot be null.");
+            }
+
+            await ValidateBenefitIdAsync(disbursement.BenefitID);
+            ValidateCitizenId(disbursement.CitizenID);
+            ValidateOfficerId(disbursement.OfficerID);
+            ValidateDate(disbursement.Date);
+            ValidateStatus(disbursement.Status);
+        }
+
+        private async Task ValidateBenefitIdAsync(int benefitId)
+        {
+            if (benefitId <= 0)
+            {
+                throw new ArgumentException("Benefit ID must be greater than zero.", nameof(benefitId));
+            }
+
+            if (!await _benefitRepository.ExistsAsync(benefitId))
+            {
+                throw new InvalidOperationException($"Benefit with ID {benefitId} does not exist. Please select a valid benefit.");
+            }
+        }
+
+        private void ValidateCitizenId(int citizenId)
+        {
+            if (citizenId <= 0)
+            {
+                throw new ArgumentException("Citizen ID must be greater than zero.", nameof(citizenId));
+            }
+
+            if (citizenId > 999999999) // Max 9 digits
+            {
+                throw new ArgumentException("Citizen ID exceeds maximum allowed digits.", nameof(citizenId));
+            }
+        }
+
+        private void ValidateOfficerId(int officerId)
+        {
+            if (officerId <= 0)
+            {
+                throw new ArgumentException("Officer ID must be greater than zero.", nameof(officerId));
+            }
+
+            if (officerId > 999999) // Max 6 digits
+            {
+                throw new ArgumentException("Officer ID exceeds maximum allowed digits.", nameof(officerId));
+            }
+        }
+
+        private void ValidateDate(DateTime date)
+        {
+            if (date == default)
+            {
+                throw new ArgumentException("Date is required.", nameof(date));
+            }
+
+            if (date > DateTime.Now.AddDays(1))
+            {
+                throw new ArgumentException("Disbursement date cannot be in the future.", nameof(date));
+            }
+
+            if (date < DateTime.Now.AddYears(-10))
+            {
+                throw new ArgumentException("Disbursement date cannot be older than 10 years.", nameof(date));
+            }
+        }
+
+        private void ValidateStatus(string status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                throw new ArgumentException("Status is required.", nameof(status));
+            }
+
+            if (!_validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+            {
+                throw new ArgumentException($"Invalid status. Valid statuses are: {string.Join(", ", _validStatuses)}", nameof(status));
+            }
+        }
+
+        #endregion
+    }
+}

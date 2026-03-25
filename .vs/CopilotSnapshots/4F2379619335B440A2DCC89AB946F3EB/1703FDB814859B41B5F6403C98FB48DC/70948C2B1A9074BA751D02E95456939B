@@ -1,0 +1,45 @@
+﻿using WelfareLinkPRJ.Interfaces;
+using WelfareLinkPRJ.Models;
+
+namespace WelfareLinkPRJ.Services
+{
+    public class BenefitService : IBenefitService
+    {
+        private readonly IBenefitRepository _benefitRepository;
+
+        public BenefitService(IBenefitRepository benefitRepository)
+        {
+            _benefitRepository = benefitRepository;
+        }
+
+        public async Task<IEnumerable<Benefit>> GetAllBenefitsAsync()
+        {
+            return await _benefitRepository.GetAllAsync();
+        }
+
+        public async Task<Benefit?> GetBenefitByIdAsync(int id)
+        {
+            return await _benefitRepository.GetByIdAsync(id);
+        }
+
+        public async Task<Benefit> CreateBenefitAsync(Benefit benefit)
+        {
+            return await _benefitRepository.AddAsync(benefit);
+        }
+
+        public async Task<Benefit> UpdateBenefitAsync(Benefit benefit)
+        {
+            return await _benefitRepository.UpdateAsync(benefit);
+        }
+
+        public async Task<bool> DeleteBenefitAsync(int id)
+        {
+            return await _benefitRepository.DeleteAsync(id);
+        }
+
+        public async Task<bool> BenefitExistsAsync(int id)
+        {
+            return await _benefitRepository.ExistsAsync(id);
+        }
+    }
+}
