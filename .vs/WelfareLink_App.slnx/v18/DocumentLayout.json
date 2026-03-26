@@ -1,0 +1,581 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\repository\\citizendocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\repository\\citizendocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\repository\\citizenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\repository\\citizenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\welfarelink_app.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\welfarelink_app.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\interface\\icitizendocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\interface\\icitizendocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\interface\\icitizenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\interface\\icitizenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\models\\citizen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\models\\citizen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\models\\citizendocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\models\\citizendocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\migrations\\20260326035941_table1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\migrations\\20260326035941_table1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\data\\welfaredbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\data\\welfaredbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\services\\icitizenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\services\\icitizenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\services\\idocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\services\\idocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\services\\citizenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\services\\citizenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\services\\documentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\services\\documentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\dashboard.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\editprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\editprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\editprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\editprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\uploaddocument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\uploaddocument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\uploaddocument.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\uploaddocument.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\documentstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\documentstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\documentstatus.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\documentstatus.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\createprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\createprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\citizen\\createprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\citizen\\createprofile.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|c:\\users\\2481282\\source\\repos\\welfarelink_app\\welfarelink_app\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{441D3DA5-F6C2-46D3-8AE9-6B0D43CDF443}|WelfareLink_App\\WelfareLink_App.csproj|solutionrelative:welfarelink_app\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 22,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "WelfareLink_App\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "WelfareLink_App\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-03-26T04:25:19.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "WelfareLink_App\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "WelfareLink_App\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-26T04:25:19.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:24:54.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Index.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:54.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:36.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:36.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:35.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:35.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CreateProfile.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:24:18.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CreateProfile.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\CreateProfile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:24:18.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DocumentStatus.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:23:56.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DocumentStatus.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\DocumentStatus.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:23:56.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "UploadDocument.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:23:29.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UploadDocument.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\UploadDocument.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:23:29.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "EditProfile.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:23:10.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "EditProfile.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\EditProfile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:23:10.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Dashboard.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml.cs",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:22:50.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml",
+              "RelativeToolTip": "WelfareLink_App\\Pages\\Citizen\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-26T04:22:50.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DocumentService.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\DocumentService.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Services\\DocumentService.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\DocumentService.cs",
+              "RelativeToolTip": "WelfareLink_App\\Services\\DocumentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:22:21.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CitizenService.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\CitizenService.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Services\\CitizenService.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\CitizenService.cs",
+              "RelativeToolTip": "WelfareLink_App\\Services\\CitizenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:22:21.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IDocumentService.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\IDocumentService.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Services\\IDocumentService.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\IDocumentService.cs",
+              "RelativeToolTip": "WelfareLink_App\\Services\\IDocumentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:22:07.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ICitizenService.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\ICitizenService.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Services\\ICitizenService.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Services\\ICitizenService.cs",
+              "RelativeToolTip": "WelfareLink_App\\Services\\ICitizenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:22:07.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CitizenDocumentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Repository\\CitizenDocumentRepository.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Repository\\CitizenDocumentRepository.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Repository\\CitizenDocumentRepository.cs",
+              "RelativeToolTip": "WelfareLink_App\\Repository\\CitizenDocumentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:12:21.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CitizenRepository.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Repository\\CitizenRepository.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Repository\\CitizenRepository.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Repository\\CitizenRepository.cs",
+              "RelativeToolTip": "WelfareLink_App\\Repository\\CitizenRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:11:43.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ICitizenDocumentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Interface\\ICitizenDocumentRepository.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Interface\\ICitizenDocumentRepository.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Interface\\ICitizenDocumentRepository.cs",
+              "RelativeToolTip": "WelfareLink_App\\Interface\\ICitizenDocumentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:08:38.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ICitizenRepository.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Interface\\ICitizenRepository.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Interface\\ICitizenRepository.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Interface\\ICitizenRepository.cs",
+              "RelativeToolTip": "WelfareLink_App\\Interface\\ICitizenRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T04:01:51.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WelfareLink_App",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\WelfareLink_App.csproj",
+              "RelativeDocumentMoniker": "WelfareLink_App\\WelfareLink_App.csproj",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\WelfareLink_App.csproj",
+              "RelativeToolTip": "WelfareLink_App\\WelfareLink_App.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-26T04:00:42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20260326035941_table1.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Migrations\\20260326035941_table1.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Migrations\\20260326035941_table1.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Migrations\\20260326035941_table1.cs",
+              "RelativeToolTip": "WelfareLink_App\\Migrations\\20260326035941_table1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T03:59:42.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Program.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Program.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Program.cs",
+              "RelativeToolTip": "WelfareLink_App\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T03:57:16.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\appsettings.json",
+              "RelativeDocumentMoniker": "WelfareLink_App\\appsettings.json",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\appsettings.json",
+              "RelativeToolTip": "WelfareLink_App\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-26T03:44:22.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CitizenDocument.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Models\\CitizenDocument.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Models\\CitizenDocument.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Models\\CitizenDocument.cs",
+              "RelativeToolTip": "WelfareLink_App\\Models\\CitizenDocument.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T03:42:40.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Citizen.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Models\\Citizen.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Models\\Citizen.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Models\\Citizen.cs",
+              "RelativeToolTip": "WelfareLink_App\\Models\\Citizen.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAgwAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T03:34:00.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WelfareDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Data\\WelfareDbContext.cs",
+              "RelativeDocumentMoniker": "WelfareLink_App\\Data\\WelfareDbContext.cs",
+              "ToolTip": "C:\\Users\\2481282\\source\\repos\\WelfareLink_App\\WelfareLink_App\\Data\\WelfareDbContext.cs",
+              "RelativeToolTip": "WelfareLink_App\\Data\\WelfareDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T03:18:27.495Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
